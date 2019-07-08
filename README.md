@@ -2,4 +2,3 @@
 學生:楊岳錩
 學籍:國立政治大學 傳播學院大一大二不分系 目前準大一
 
-I have no idea what to type.
