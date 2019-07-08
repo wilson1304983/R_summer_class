@@ -1,3 +1,3 @@
 #　Example Site
 
- This is a sample readme file for our GitHub Example repo.
+I have no idea what to type.
