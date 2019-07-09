@@ -6,11 +6,11 @@
 
 ## Week 1   
 ### 課程    
-1.創github帳號     
+#### 1.創github帳號     
 2.建立readme    
 3.R markdown (https://wilson1304983.github.io/666666/week1/Rmdd.html)       
 ### 回家    
-1. 完成datacamp免費部分
+#### 1. 完成datacamp免費部分   
 ## Week 2   
 ## Week 3   
 
