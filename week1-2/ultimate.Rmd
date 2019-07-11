@@ -1,0 +1,5 @@
+---
+title: "ultimate"
+output: html_document
+---
+cbind(y,studentamount)
