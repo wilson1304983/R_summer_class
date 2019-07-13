@@ -11,6 +11,10 @@
 3.R markdown (https://wilson1304983.github.io/666666/week1/Rmdd.html)       
 ### 回家    
 #### 1. 完成datacamp免費部分   
+### 課程
+#### 1.教學爬蟲
+### 回家
+#### 1.完成作業(https://wilson1304983.github.io/666666/week1-2/ultimate.html)
 ## Week 2   
 ## Week 3   
 
