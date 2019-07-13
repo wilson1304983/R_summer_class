@@ -1,5 +1,14 @@
 ---
-title: "ultimate"
+title: "大學學生人數與圖書館座位數的關係"
 output: html_document
 ---
-cbind(y,studentamount)
+```{r warning=FALSE, message=FALSE}
+data1 <- read.csv(file="C:/data_science/studentamount.csv", header=TRUE, sep=",", quote = " ")
+data2 <- read.csv(file="C:/data_science/107_library2.csv", header=TRUE, sep=",", quote = " ")
+names(data2)[names(data2) == "圖書閱覽座位數.個."] <- "seat_number"
+names(data2)[names(data2) == "學校名稱"] <- "school_name"
+data3 = data2[,c("school_name","seat_number")]
+data3 <- data3[-c(20:153), ]
+end = cbind(data3,data1)
+```
+
