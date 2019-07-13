@@ -1,5 +1,5 @@
 ---
-title: "大學學生人數與圖書館座位數的關係"
+title: "大學人數與圖書館座位的關係"
 output: html_document
 ---
 ```{r warning=FALSE, message=FALSE}
@@ -10,5 +10,6 @@ names(data2)[names(data2) == "學校名稱"] <- "school_name"
 data3 = data2[,c("school_name","seat_number")]
 data3 <- data3[-c(20:153), ]
 end = cbind(data3,data1)
+end
 ```
 
