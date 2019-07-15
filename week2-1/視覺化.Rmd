@@ -37,7 +37,7 @@ ggplot(data=end2)+
   geom_point(aes(x=student_amount,y=ratio_of_student_seat,color=school_name))
 ```
 
-#### 因為中文校名會太擠，所以我先把校名換成140開頭的IP。
+#### 因為中文全名會太擠，所以我先把校名改成縮寫。
 #### 最後用長條圖看哪間學校的座位總數最多，以及每個學生平均分到的座位最多。
 ```{r}
 
