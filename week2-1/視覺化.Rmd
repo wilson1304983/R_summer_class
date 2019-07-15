@@ -1,0 +1,36 @@
+---
+title: "視覺化"
+output: html_document
+---
+```{r}
+data1 <- read.csv(file="C:/data_science/studentamount.csv", header=TRUE,sep=",", quote = " ")
+data2 <- read.csv(file="C:/data_science/107_library2.csv", header=TRUE, sep=",", quote = " ")
+names(data2)[names(data2) == "圖書閱覽座位數.個."] <- "seat_number"
+names(data2)[names(data2) == "學校名稱"] <- "school_name"
+data3 = data2[,c("school_name","seat_number")]
+data3 <- data3[-c(20:153), ]
+end = cbind(data3,data1)
+end
+
+library(ggplot2)
+
+ggplot(data=end)+
+geom_point(aes(x=seat_number,y=student_amount,color=school_name))
+
+
+z <- with(end, seat_number / student_amount)
+end2 = cbind(data3,data1,z)
+names(end2)[names(end2) == "z"] <- "ratio_of_student_seat"
+
+```
+```{r}
+ggplot(data=end2)+
+  geom_point(aes(x=student_amount,y=ratio_of_student_seat,color=school_name))
+```
+
+
+```{r}
+ggplot(data=end2,aes(x=school_name,y=ratio_of_student_seat,fill=seat_number ))+
+  geom_bar(stat = "identity")
+```
+
