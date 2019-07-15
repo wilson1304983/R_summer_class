@@ -18,35 +18,31 @@ end
 
 library(ggplot2)
 ```
-
-#### 我先用散佈圖查看學生人數與圖書館座位的大致關係
+#### 因為中文全名會太擠，所以我先把校名改成縮寫。
+#### 我先計算座位數/學生人數 的比值關係
 ```{r}
-ggplot(data=end)+
-geom_point(aes(x=seat_number,y=student_amount,color=school_name))
-
-
 z <- with(end, seat_number / student_amount)
 end2 = cbind(data3,data1,z)
 names(end2)[names(end2) == "z"] <- "ratio_of_student_seat"
+school_name = c("政大","清大","台大","師大","成大","中興","交大","中央","中山","海大","中正","高師","彰師","陽明","北大","嘉義","高雄","東華","暨南")
+data4 = end2[,c("student_amount","seat_number","ratio_of_student_seat")]
+end3 = cbind(school_name,data4)
+```
+
+#### 我先用散佈圖查看學生人數與圖書館座位的大致關係
+```{r}
+ggplot(data=end3)+
+labs(aes(x=seat_number,y=student_amount))+
+geom_text(aes(x=seat_number,y=student_amount,label = school_name))
+
 
 ```
 
 #### 這次y軸換成 座位數/學生人數，觀看每個學生平均佔有幾個圖書館座位
-```{r}
-ggplot(data=end2)+
-  geom_point(aes(x=student_amount,y=ratio_of_student_seat,color=school_name))
-```
-
-#### 因為中文全名會太擠，所以我先把校名改成縮寫。
 #### 最後用長條圖看哪間學校的座位總數最多，以及每個學生平均分到的座位最多。
 ```{r}
-
-school_name = c("政大","清大","台大","師大","成大","中興","交大","中央","中山","海大","中正","高師","彰師","陽明","北大","嘉義","高雄","東華","暨南")
-data4 = end2[,c("student_amount","seat_number","ratio_of_student_seat")]
-end3 = cbind(school_name,data4)
 ggplot(data=end3,aes(x=school_name,y=ratio_of_student_seat,fill=seat_number ))+
   geom_bar(stat = "identity")
-
 ```
 
 ## 小結
