@@ -2,6 +2,10 @@
 title: "視覺化"
 output: html_document
 ---
+## 簡介
+#### 因為我常常在Dcard上看到政大學生抱怨圖書館沒位置，所以我想用資料來看政大是否又老又窮。
+## 資料來源
+#### 從我的HW1
 ```{r}
 data1 <- read.csv(file="C:/data_science/studentamount.csv", header=TRUE,sep=",", quote = " ")
 data2 <- read.csv(file="C:/data_science/107_library2.csv", header=TRUE, sep=",", quote = " ")
@@ -13,7 +17,10 @@ end = cbind(data3,data1)
 end
 
 library(ggplot2)
+```
 
+#### 我先用散佈圖查看學生人數與圖書館座位的大致關係
+```{r}
 ggplot(data=end)+
 geom_point(aes(x=seat_number,y=student_amount,color=school_name))
 
@@ -23,12 +30,15 @@ end2 = cbind(data3,data1,z)
 names(end2)[names(end2) == "z"] <- "ratio_of_student_seat"
 
 ```
+
+#### 這次y軸換成 座位數/學生人數，觀看每個學生平均佔有幾個圖書館座位
 ```{r}
 ggplot(data=end2)+
   geom_point(aes(x=student_amount,y=ratio_of_student_seat,color=school_name))
 ```
 
-
+#### 因為中文校名會太擠，所以我先把校名換成英文。
+最後用長條圖看哪間學校的座位總數最多，以及每個學生平均分到的座位最多。
 ```{r}
 
 school_name = c("NCCU","NTHU","NTU","NTNU","NCKU","NCHU","NCTU","NCU","NSYSU","NTOU","CCU","NCUE","NKNU","YM","NTPU","NCYU","NUK","NDHU","NCNU")
@@ -38,3 +48,5 @@ ggplot(data=end3,aes(x=school_name,y=ratio_of_student_seat,fill=seat_number ))+
   geom_bar(stat = "identity")
 ```
 
+## 小結
+#### 其實政大好像也沒那麼慘，可能是認真的人比較多(?)
