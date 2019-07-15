@@ -16,5 +16,10 @@
 ### 回家
 #### 1.完成作業(https://wilson1304983.github.io/666666/week1-2/ultimate.html)
 ## Week 2   
+### 課程  
+#### 1.視覺化
+#### 1.完成視覺化作業(https://wilson1304983.github.io/666666/week2-1/視覺化.html)
+### 回家
+#### 1.無
 ## Week 3   
 
