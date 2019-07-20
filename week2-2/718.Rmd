@@ -1,0 +1,140 @@
+---
+title: "textmining"
+output: html_document
+---
+由於最近指考成績放榜，所以我想看PTT上的高中版大家想要什麼樣的科系
+```{r}
+library(rvest)
+library(NLP)
+library(tm)
+library(jiebaRD)
+library(jiebaR)
+library(RColorBrewer)
+library(wordcloud)
+library(tmcn)
+library(Matrix)
+full_page = read_html("https://www.ptt.cc/bbs/SENIORHIGH/index2623.html")
+tag_nodes = html_nodes(full_page,"div.title a")
+tags = html_text(tag_nodes)
+title = as.list(c(tags))
+docs <- Corpus(VectorSource(title))
+
+toSpace <- content_transformer(function(x, pattern) {
+  return (gsub(pattern, " ", x))
+}
+)
+docs <- tm_map(docs, toSpace, "※")
+docs <- tm_map(docs, toSpace, "◆")
+docs <- tm_map(docs, toSpace, "‧")
+docs <- tm_map(docs, toSpace, "的")
+docs <- tm_map(docs, toSpace, "代")
+docs <- tm_map(docs, toSpace, "了")
+docs <- tm_map(docs, toSpace, "我")
+docs <- tm_map(docs, toSpace, "板")
+docs <- tm_map(docs, toSpace, "後")
+docs <- tm_map(docs, toSpace, "是")
+docs <- tm_map(docs, toSpace, "嗎")
+docs <- tm_map(docs, toSpace, "該")
+docs <- tm_map(docs, toSpace, "選")
+docs <- tm_map(docs, toSpace, "本")
+docs <- tm_map(docs, toSpace, "被")
+docs <- tm_map(docs, toSpace, "規")
+docs <- tm_map(docs, toSpace, "科")
+docs <- tm_map(docs, toSpace, "數")
+docs <- tm_map(docs, toSpace, "非")
+docs <- tm_map(docs, toSpace, "務")
+docs <- tm_map(docs, toSpace, "系")
+docs <- tm_map(docs, toSpace, "一")
+docs <- tm_map(docs, toSpace, "二")
+docs <- tm_map(docs, toSpace, "三")
+docs <- tm_map(docs, toSpace, "或")
+docs <- tm_map(docs, toSpace, "全")
+docs <- tm_map(docs, toSpace, "乙")
+docs <- tm_map(docs, toSpace, "類")
+docs <- tm_map(docs, toSpace, "校")
+docs <- tm_map(docs, toSpace, "人")
+docs <- tm_map(docs, toSpace, "個")
+docs <- tm_map(docs, toSpace, "擇")
+docs <- tm_map(docs, toSpace, "也")
+docs <- tm_map(docs, toSpace, "較")
+docs <- tm_map(docs, toSpace, "大")
+docs <- tm_map(docs, toSpace, "目")
+docs <- tm_map(docs, toSpace, "剩")
+docs <- tm_map(docs, toSpace, "少")
+docs <- tm_map(docs, toSpace, "圖表")
+docs <- tm_map(docs, toSpace, "今年")
+docs <- tm_map(docs, toSpace, "網站")
+docs <- tm_map(docs, toSpace, "甲難")
+docs <- tm_map(docs, toSpace, "查詢")
+docs <- tm_map(docs, toSpace, "風評")
+docs <- tm_map(docs, toSpace, "各位")
+docs <- tm_map(docs, toSpace, "去年")
+docs <- tm_map(docs, toSpace, "心情")
+docs <- tm_map(docs, toSpace, "學年")
+docs <- tm_map(docs, toSpace, "收到")
+docs <- tm_map(docs, toSpace, "多少")
+docs <- tm_map(docs, toSpace, "情報")
+docs <- tm_map(docs, toSpace, "這屆")
+docs <- tm_map(docs, toSpace, "如何")
+docs <- tm_map(docs, toSpace, "好像")
+docs <- tm_map(docs, toSpace, "請洽")
+docs <- tm_map(docs, toSpace, "最多")
+docs <- tm_map(docs, toSpace, "請洽")
+docs <- tm_map(docs, toSpace, "反推")
+docs <- tm_map(docs, toSpace, "任意")
+docs <- tm_map(docs, toSpace, "心得")
+docs <- tm_map(docs, toSpace, "重要")
+docs <- tm_map(docs, toSpace, "討論")
+docs <- tm_map(docs, toSpace, "還剩")
+docs <- tm_map(docs, toSpace, "關於")
+docs <- tm_map(docs, toSpace, "問題")
+docs <- tm_map(docs, toSpace, "選擇")
+docs <- tm_map(docs, toSpace, "算命")
+docs <- tm_map(docs, toSpace, "歷屆")
+docs <- tm_map(docs, toSpace, "分享")
+docs <- tm_map(docs, toSpace, "公告")
+docs <- tm_map(docs, toSpace, "看板")
+docs <- tm_map(docs, toSpace, "交流")
+docs <- tm_map(docs, toSpace, "新聞")
+docs <- tm_map(docs, toSpace, "開放")
+docs <- tm_map(docs, toSpace, "作者")
+docs <- tm_map(docs, toSpace, "勸世文")
+docs <- tm_map(docs, toSpace, "高中生")
+docs <- tm_map(docs, toSpace, "發信站")
+docs <- tm_map(docs, toSpace, "批踢踢實業坊")
+docs <- tm_map(docs, toSpace, "[a-zA-Z]")
+docs <- tm_map(docs, removePunctuation)
+docs <- tm_map(docs, removeNumbers)
+docs <- tm_map(docs, stripWhitespace)
+docs
+
+mixseg = worker()
+
+jieba_tokenizer=function(d){
+  unlist(segment(d[[1]],mixseg))
+}
+
+seg = lapply(docs, jieba_tokenizer)
+freqFrame = as.data.frame(table(unlist(seg)))
+par(family=("Heiti TC Light"))
+wordcloud(freqFrame$Var1,freqFrame$Freq,
+          scale=c(5,0.1),min.freq=50,max.words=150,
+          random.order=TRUE, random.color=FALSE,
+          rot.per=.1, colors=brewer.pal(8, "Dark2"),
+          ordered.colors=FALSE,use.r.layout=FALSE,
+          
+          fixed.asp=TRUE)
+
+mixseg = worker()
+jieba_tokenizer=function(d){
+  unlist(segment(d[[1]],mixseg))
+}
+seg = lapply(docs, jieba_tokenizer)
+freqFrame = as.data.frame(table(unlist(seg)))
+freqFrame = freqFrame[order(freqFrame$Freq,decreasing=TRUE), ]
+library(knitr)
+kable(head(freqFrame), format = "markdown")
+
+
+```
+
