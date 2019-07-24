@@ -1,0 +1,84 @@
+---
+title: "final"
+output: html_document
+---
+```{r}
+library(readr)
+accident <- read_csv("C:/Users/Ping-Hung/Desktop/accident.csv",locale = locale(encoding = "BIG5"))
+windowsFonts(A=windowsFont("微軟正黑體"))
+
+#性別
+library(ggplot2)                           
+sex = accident[,c("性別")]
+names(sex)[names(sex) == "性別"] <- "gender" #改colume名字
+sex2 = table(unlist(sex, use.names=F))
+head(sex2)
+sex2 = data.frame(sex2)
+sex3 = sex2[,c("Freq")]
+sex3 = data.frame(sex3)
+Var1 <- c("男", "女", "物","肇逃")
+Var1 = data.frame(Var1)
+sex_final = cbind(Var1,sex3)
+ggplot(data=sex_final,aes(x=Var1,y=sex3))+
+  geom_bar(stat = "identity")+coord_flip()
+
+
+#車種
+library(dplyr)
+car = accident[,c("車種")]
+car2 = table(unlist(car, use.names=F))
+head(car2)
+car2 = data.frame(car2)
+car3 = car2[,c("Freq")]
+car3 = data.frame(car3)
+Var2 <- c("公營公車", "民營公車", "公營客運","民營客運","遊覽車","自用大客車","營業用大貨車","自用大貨車","營業用全聯結車","營業用半聯結車","自用半聯結車","營業用曳引車","自用曳引車","計程車","租賃車","自用小客車","營業用小貨車","自用小貨車","大型重型機車1(550C.C.以上)","大型重型機車2(250-550C.C.)","普通重型機車","普通輕型機車","小型輕型機車","小型車","救護車","消防車","警備車","工程車","其他特種車","腳踏自行車","電動輔助自行車","電動自行車","人力車","其他慢車","拼裝車","農耕用車(或機械)","動力機械","拖車(架)","其他車","行人","乘客","其他人")
+Var2 = data.frame(Var2)
+car_final = cbind(Var2,car3)
+car_final2<-filter(car_final,car3>100) #只討論事件數100以上
+car_final2 = data.frame(car_final2)
+ggplot(data=car_final2,aes(x=Var2,y=car3))+
+    geom_bar(stat = "identity")+coord_flip()
+
+
+
+#車種與性別 專門討論普通重型機車
+car_sex = accident[,c("車種","性別")]
+car_sex2 = subset(car_sex,車種=="C03")
+car_sex2 = car_sex2[,c("性別")]
+car_sex3 = table(unlist(car_sex2, use.names=F))
+car_sex_final = data.frame(car_sex3)
+car_sex_final = car_sex_final[,c("Freq")]
+car_sex_final = cbind(Var1,car_sex_final)
+ggplot(data=car_sex_final,aes(x=Var1,y=car_sex_final))+
+  geom_bar(stat = "identity")+coord_flip()
+#性別/普通重型機車駕照數
+licence <- read_csv("C:/Users/Ping-Hung/Desktop/licence.csv") #使用內政部資料
+sex_extra <- sex_final[-c(3:4),]
+sex_final2 = cbind(sex_extra,licence)
+sex_final2<-mutate(sex_final2,ratio=sex3/licence)
+ggplot(data=sex_final2,aes(x=Var1,y=ratio))+
+  geom_bar(stat = "identity")+coord_flip()
+
+
+
+#車種與性別 專門討論普通輕型機車
+car_sex_light = accident[,c("車種","性別")]
+car_sex_light2 = subset(car_sex_light,車種=="C04")
+car_sex_light2 = car_sex_light2[,c("性別")]
+car_sex_light3= table(unlist(car_sex_light2, use.names=F))
+car_sex_final_light= data.frame(car_sex_light3)
+car_sex_final_light = car_sex_final_light[,c("Freq")]
+car_sex_final_light= data.frame(car_sex_final_light)
+car_sex_final_light = cbind(Var1,car_sex_final_light)
+ggplot(data=car_sex_final_light,aes(x=Var1,y=car_sex_final_light))+
+  geom_bar(stat = "identity")+coord_flip()
+#性別/普通輕型機車駕照數
+light <- read_csv("C:/Users/Ping-Hung/Desktop/light.csv") #使用內政部資料
+sex_light_extra <- car_sex_final_light[-c(3:4),]
+sex_light_final = cbind(sex_light_extra,light)
+sex_light_final2<-mutate(sex_light_final,ratio=car_sex_final_light/light_licence)
+ggplot(data=sex_light_final2,aes(x=Var1,y=ratio))+
+  geom_bar(stat = "identity")+coord_flip()
+
+```
+
