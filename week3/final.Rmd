@@ -4,11 +4,20 @@ output: html_document
 ---
 ## 概論
 
-我們在**臺北市資料大平台**裡，找到一份有趣的資料——「交通事故資訊」，於是想從這份資料，探究***什麼樣的人比較容易發生交通事故(who)***、***什麼的時段比較容易發生交通事故(when)***以及***什麼區域最容易發生交通事故(where)***等三個問題，目前這頁網站主要討論第三個問題，想以「區域」的角度看臺北市交通事故的問題，並試圖提供每個區域最容易出車禍的地點資訊，以方便駕駛、行人經過該路段可以更加小心謹慎一些。
-
+我們在**臺北市資料大平台**裡，找到一份有趣的資料——「交通事故資訊」，於是想從這份資料，探究***什麼樣的人比較容易發生交通事故(who)***、***什麼的時段比較容易發生交通事故(when)***以及***什麼區域最容易發生交通事故(where)***等三個問題。
 ## 資料介紹
 
 此資料來自**臺北市資料大平台**，以「107年-臺北市A1及A2類交通事故明細.csv」此資料為主要分析，裡面的column有「發生年、發生月、發生日、發生時 發生分、處理別、區序、肇事地點、死亡人數、受傷人數、當事人序、車種、性別、年齡、受傷程度、天候、速限、道路型態以及事故位置」，而總資料數有50330筆。
+
+## 其他分析連結
+
+附上同組員的html  
+
+黃科銓    
+[區域分析](https://kevinhuang102888.github.io/kevinhuang/week3/final%20project/taipei_accident)    
+胡煜欣    
+[時間分析1](https://cinnyhu.github.io/Class/Week3/www.html)   
+[時間分析2](https://cinnyhu.github.io/Class/Week3/wwww.html)  
 
 ### 讀取資料
 ```{r}
@@ -93,9 +102,4 @@ sex_light_final2<-mutate(sex_light_final,ratio=car_sex_final_light/light_licence
 ggplot(data=sex_light_final2,aes(x=Var1,y=ratio))+
   geom_bar(stat = "identity")+coord_flip()
 ```
-### 附上同組員的html  
-### 黃科銓    
-### https://kevinhuang102888.github.io/kevinhuang/week3/final%20project/taipei_accident       
-### 胡煜欣    
-### https://cinnyhu.github.io/Class/Week3/www.html   
-### https://cinnyhu.github.io/Class/Week3/wwww.html   
+
