@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="ISO-8859-1">
+    <title>&lt;title&gt; element</title>
+  </head>
+  <body>
+    <h1>&lt;h1&gt; element</h1>
+    <p>Japanese example: ご飯が熱い。</p>
+  </body>
+</html>
 # 夏季學院:資料科學程式設計   
 ## 個人簡介
 姓名:楊岳錩   
