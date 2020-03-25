@@ -1,22 +1,15 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html>
   <head>
     <meta charset="utf-8">
-    <title>Meta examples</title>
-    
-    <meta name="author" content="Chris Mills">
-    <meta name="description" content="This is an example page to demonstrate usage of metadata on web pages.">
-
-    <meta property="og:image" content="https://developer.cdn.mozilla.net/static/img/opengraph-logo.dc4e08e2f6af.png">
-    <meta property="og:description" content="This is an example page to demonstrate usage of metadata on web pages.">
-    <meta property="og:title" content="Metadata; The HTML &lt;head&gt;, on MDN">
-
-    <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon">
+    <title>My test page</title>
   </head>
   <body>
-    <h1>Meta examples</h1>
-    <link rel="stylesheet" href="my-css-file.css">
-    <script src="my-js-file.js"></script>
-    <p>Japanese example: ご飯が熱い。</p>
+    <p>This is my page</p>
+<h1 title = "hello">hello</h1>
+<p>I am 楊岳錩 from <strong>東方哈佛aka政治大學<strong></p>
+<p><a href = "https://www.facebook.com/wilson.yang.564">網址連結</p>
+<img src="https://yt3.ggpht.com/a/AGF-l784H28l2MavPVsIs91cL57e_MbIg5QL9a0Niw=s900-c-k-c0xffffffff-no-rj-mo">
+
   </body>
 </html>
