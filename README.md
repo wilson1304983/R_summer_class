@@ -4,7 +4,7 @@
     <meta charset="utf-8">
   </head>
   <body>
-    <p>This is my page</p>
+    <p>這是我的github網頁</p>
 <h1 title = "hello">hello</h1>
 <p>I am 楊岳錩 from <strong>東方哈佛aka政治大學<strong></p>
 <p><a href = "https://www.facebook.com/wilson.yang.564">ig連結</p>
